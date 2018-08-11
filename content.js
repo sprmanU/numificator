@@ -1,20 +1,24 @@
 $(function () {
-  $.fn.getTextNodes = function(contentText) {
+  $.fn.getTextElements = function(contentT) {
     return $(this).find(":not(iframe)").addBack().contents().filter(function() {
-      return this.nodeType == 3 && this.nodeValue.indexOf(contentText) != -1;
+      return this.nodeType == 3 && this.nodeValue.indexOf(contentT) != -1;
     });
   };
-  var config = {}
-  config.text_config = [
+  var newt = {}
+  newt.text_config = [
     {
       src: "PSD",
-      target: "MUIE PSD"
-    }
+	  target: "PSD"
+    },
+	{
+		src: "psd",
+		target: 'psd'
+	}
   ];
-  config.text_config.forEach(function (obj) {
-    var re = new RegExp(obj.src, 'ig');
-    $('*').getTextNodes(obj.src).each(function(item, element) {
-      this.nodeValue = this.nodeValue.replace(re, 'MUIE PSD');
+  newt.text_config.forEach(function (obj) {
+    var repl = new RegExp(obj.src, 'ig');
+    $('*').getTextElements(obj.src).each(function(item, element) {
+      this.nodeValue = this.nodeValue.replace(repl, 'MUIE PSD');
     });
   });
 });
